@@ -8,6 +8,7 @@
 <body>
     <header class="header">
         <a class="header__logo" href="/">FashionablyLate</a>
+        <a class="header__link" href="/register">register</a>
     </header>
 
     <main>
@@ -53,9 +54,6 @@
                     </div>
                 </form>
 
-                <div class="auth__link">
-                    <a href="/register">会員登録はこちら</a>
-                </div>
             </div>
         </div>
     </main>

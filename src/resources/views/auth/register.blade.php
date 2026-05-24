@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>会員登録</title>
+    <title>管理者登録</title>
     <link rel="stylesheet" href="{{ asset('css/common.css') }}">
 </head>
 <body>

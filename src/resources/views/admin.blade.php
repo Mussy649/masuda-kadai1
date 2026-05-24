@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <title>管理画面</title>
     <link rel="stylesheet" href="{{ asset('css/common.css') }}">
 </head>
+
 <body>
     <header class="header">
         <a class="header__logo" href="/">FashionablyLate</a>
+
+        <form class="header__form" action="/logout" method="POST">
+            @csrf
+            <button class="header__button" type="submit">logout</button>
+        </form>
     </header>
 
     <main>
@@ -16,24 +23,23 @@
                 <h2>Admin</h2>
             </div>
 
-            <div class="admin__logout">
-                <form action="/logout" method="POST">
-                    @csrf
-                    <button class="admin__logout-button" type="submit">logout</button>
-                </form>
-            </div>
-
             <form class="search-form" action="/search" method="GET">
-                <input class="search-form__keyword" type="text" name="keyword" value="{{ request('keyword') }}" placeholder="名前やメールアドレスを入力してください">
+                <input
+                    class="search-form__keyword"
+                    type="text"
+                    name="keyword"
+                    value="{{ request('keyword') }}"
+                    placeholder="名前やメールアドレスを入力してください"
+                >
 
-                <select name="gender">
+                <select class="search-form__gender" name="gender">
                     <option value="">性別</option>
                     <option value="1" {{ request('gender') == '1' ? 'selected' : '' }}>男性</option>
                     <option value="2" {{ request('gender') == '2' ? 'selected' : '' }}>女性</option>
                     <option value="3" {{ request('gender') == '3' ? 'selected' : '' }}>その他</option>
                 </select>
 
-                <select name="categry_id">
+                <select class="search-form__category" name="categry_id">
                     <option value="">お問い合わせの種類</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}" {{ request('categry_id') == $category->id ? 'selected' : '' }}>
@@ -42,17 +48,47 @@
                     @endforeach
                 </select>
 
-                <input type="date" name="date" value="{{ request('date') }}">
+                <input
+                    class="search-form__date"
+                    type="date"
+                    name="date"
+                    value="{{ request('date') }}"
+                >
 
                 <button class="search-form__button" type="submit">検索</button>
+
+                <a class="search-form__reset" href="/admin">リセット</a>
             </form>
 
             <div class="admin__actions">
-                <a class="admin__export" href="{{ url('/export') . (request()->getQueryString() ? '?' . request()->getQueryString() : '') }}">
+                <a
+                    class="admin__export"
+                    href="{{ url('/export') . (request()->getQueryString() ? '?' . request()->getQueryString() : '') }}"
+                >
                     エクスポート
                 </a>
 
-                <a class="admin__reset" href="/admin">リセット</a>
+                <div class="admin__pagination">
+                    @if ($contacts->onFirstPage())
+                        <span class="pagination__item pagination__item--disabled">&lt;</span>
+                    @else
+                        <a class="pagination__item" href="{{ $contacts->appends(request()->query())->previousPageUrl() }}">&lt;</a>
+                    @endif
+
+                    @for ($i = 1; $i <= $contacts->lastPage(); $i++)
+                        @if ($i == $contacts->currentPage())
+                            <span class="pagination__item pagination__item--active">{{ $i }}</span>
+                        @else
+                            <a class="pagination__item" href="{{ $contacts->appends(request()->query())->url($i) }}">{{ $i }}</a>
+                        @endif
+                    @endfor
+
+                    @if ($contacts->hasMorePages())
+                        <a class="pagination__item" href="{{ $contacts->appends(request()->query())->nextPageUrl() }}">&gt;</a>
+                    @else
+                        <span class="pagination__item pagination__item--disabled">&gt;</span>
+                    @endif
+                </div>
             </div>
 
             <table class="admin-table">
@@ -81,19 +117,17 @@
                         </td>
 
                         <td>{{ $contact->email }}</td>
-
                         <td>{{ $contact->category->content }}</td>
-
                         <td>{{ $contact->detail }}</td>
 
-                        <td>
+                        <td class="admin-table__action">
                             <a class="admin-table__link" href="#modal-{{ $contact->id }}">詳細</a>
                         </td>
 
-                        <td>
-                            <form action="/delete" method="POST">
+                        <td class="admin-table__action">
+                            <form action="/delete/{{ $contact->id }}" method="POST">
                                 @csrf
-                                <input type="hidden" name="id" value="{{ $contact->id }}">
+                                @method('DELETE')
                                 <button class="admin-table__button" type="submit">削除</button>
                             </form>
                         </td>
@@ -102,7 +136,9 @@
             </table>
 
             @foreach ($contacts as $contact)
-                <div id="modal-{{ $contact->id }}" class="modal">
+                <div class="modal" id="modal-{{ $contact->id }}">
+                    <a class="modal__overlay" href="#"></a>
+
                     <div class="modal-content">
                         <h2>お問い合わせ詳細</h2>
 
@@ -130,11 +166,8 @@
                     </div>
                 </div>
             @endforeach
-
-            <div class="pagination">
-                {{ $contacts->appends(request()->query())->links() }}
-            </div>
         </div>
     </main>
 </body>
+
 </html>

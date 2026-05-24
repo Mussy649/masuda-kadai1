@@ -49,9 +49,10 @@ class AdminController extends Controller
     }
 
 
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        Contact::find($request->id)->delete();
+        $contact = Contact::findOrFail($id);
+        $contact->delete();
 
         return redirect('/admin');
     }
