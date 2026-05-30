@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <title>確認画面</title>
     <link rel="stylesheet" href="{{ asset('css/common.css') }}">
 </head>
+
 <body>
     <header class="header">
         <a class="header__logo" href="/">FashionablyLate</a>
@@ -83,22 +85,25 @@
                     </tr>
                 </table>
 
-                <input type="hidden" name="categry_id" value="{{ $contact['categry_id'] }}">
+                <input type="hidden" name="category_id" value="{{ $contact['category_id'] }}">
                 <input type="hidden" name="first_name" value="{{ $contact['first_name'] }}">
                 <input type="hidden" name="last_name" value="{{ $contact['last_name'] }}">
                 <input type="hidden" name="gender" value="{{ $contact['gender'] }}">
                 <input type="hidden" name="email" value="{{ $contact['email'] }}">
-                <input type="hidden" name="tel" value="{{ $contact['tel'] }}">
+                <input type="hidden" name="tel1" value="{{ $contact['tel1'] }}">
+                <input type="hidden" name="tel2" value="{{ $contact['tel2'] }}">
+                <input type="hidden" name="tel3" value="{{ $contact['tel3'] }}">
                 <input type="hidden" name="address" value="{{ $contact['address'] }}">
                 <input type="hidden" name="building" value="{{ $contact['building'] }}">
                 <input type="hidden" name="detail" value="{{ $contact['detail'] }}">
 
                 <div class="confirm__button">
-                    <button class="confirm__button-submit" type="submit">送信</button>
-                    <a class="confirm__link" href="/">修正</a>
+                    <button class="confirm__button-submit" type="submit" name="send" value="send">送信</button>
+                    <button class="confirm__link" type="submit" name="back" value="back">修正</button>
                 </div>
             </form>
         </div>
     </main>
 </body>
+
 </html>

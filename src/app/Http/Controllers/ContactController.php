@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\ContactRequest;
 use App\Models\Category;
 use App\Models\Contact;
@@ -19,7 +18,34 @@ class ContactController extends Controller
     public function confirm(ContactRequest $request)
     {
         $contact = $request->only([
-            'categry_id',
+            'category_id',
+            'first_name',
+            'last_name',
+            'gender',
+            'email',
+            'tel1',
+            'tel2',
+            'tel3',
+            'address',
+            'building',
+            'detail',
+        ]);
+
+        $contact['tel'] = $request->tel1 . $request->tel2 . $request->tel3;
+
+        $category = Category::find($request->category_id);
+
+        return view('confirm', compact('contact', 'category'));
+    }
+
+    public function store(ContactRequest $request)
+    {
+        if ($request->has('back')) {
+            return redirect('/')->withInput();
+        }
+
+        $contact = $request->only([
+            'category_id',
             'first_name',
             'last_name',
             'gender',
@@ -31,24 +57,7 @@ class ContactController extends Controller
 
         $contact['tel'] = $request->tel1 . $request->tel2 . $request->tel3;
 
-        $category = Category::find($request->categry_id);
-
-        return view('confirm', compact('contact', 'category'));
-    }
-
-    public function store(Request $request)
-    {
-        Contact::create($request->only([
-            'categry_id',
-            'first_name',
-            'last_name',
-            'gender',
-            'email',
-            'tel',
-            'address',
-            'building',
-            'detail',
-        ]));
+        Contact::create($contact);
 
         return redirect('/thanks');
     }

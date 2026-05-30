@@ -133,16 +133,16 @@
                     </div>
 
                     <div class="form__input">
-                        <select name="categry_id">
+                        <select name="category_id">
                             <option value="">選択してください</option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}" {{ old('categry_id') == $category->id ? 'selected' : '' }}>
+                                <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
                                     {{ $category->content }}
                                 </option>
                             @endforeach
                         </select>
 
-                        @error('categry_id')
+                        @error('category_id')
                             <p class="form__error">{{ $message }}</p>
                         @enderror
                     </div>

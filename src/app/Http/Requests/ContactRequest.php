@@ -22,7 +22,7 @@ class ContactRequest extends FormRequest
             'tel2' => ['required', 'regex:/^[0-9]+$/', 'max:5'],
             'tel3' => ['required', 'regex:/^[0-9]+$/', 'max:5'],
             'address' => ['required'],
-            'categry_id' => ['required'],
+            'category_id' => ['required'],
             'detail' => ['required', 'max:120'],
         ];
     }
@@ -52,7 +52,7 @@ class ContactRequest extends FormRequest
 
             'address.required' => '住所を入力してください',
 
-            'categry_id.required' => 'お問い合わせの種類を選択してください',
+            'category_id.required' => 'お問い合わせの種類を選択してください',
 
             'detail.required' => 'お問い合わせ内容を入力してください',
             'detail.max' => 'お問い合わせ内容は120文字以内で入力してください',

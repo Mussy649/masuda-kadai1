@@ -502,3 +502,78 @@ textarea {
     color: #8b7969;
     text-decoration: none;
 }
+
+.confirm__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.confirm__link {
+    border: none;
+    background: transparent;
+    color: #8B7969;
+    text-decoration: underline;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 20px;
+    padding: 0;
+}
+
+.modal-content {
+    position: relative;
+}
+
+.modal__close-button {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    width: 28px;
+    height: 28px;
+    border: 1px solid #8B7969;
+    border-radius: 50%;
+    color: #8B7969;
+    text-align: center;
+    line-height: 26px;
+    text-decoration: none;
+    font-size: 18px;
+    background: #fff;
+}
+
+.modal-detail {
+    margin-top: 30px;
+}
+
+.modal-detail__row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 18px;
+}
+
+.modal-detail__label {
+    width: 180px;
+    font-weight: bold;
+    color: #8B7969;
+}
+
+.modal-detail__value {
+    flex: 1;
+    color: #8B7969;
+}
+
+.modal__delete-form {
+    margin-top: 35px;
+    text-align: center;
+}
+
+.modal__delete-button {
+    padding: 8px 24px;
+    border: none;
+    background-color: #BA370D;
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+}

@@ -34,8 +34,8 @@ class AdminController extends Controller
             $contacts->where('gender', $request->gender);
         }
 
-        if ($request->categry_id) {
-            $contacts->where('categry_id', $request->categry_id);
+        if ($request->category_id) {
+            $contacts->where('category_id', $request->category_id);
         }
 
         if ($request->date) {
@@ -75,8 +75,8 @@ class AdminController extends Controller
             $contacts->where('gender', $request->gender);
         }
 
-        if ($request->categry_id) {
-            $contacts->where('categry_id', $request->categry_id);
+        if ($request->category_id) {
+            $contacts->where('category_id', $request->category_id);
         }
 
         if ($request->date) {
@@ -117,7 +117,7 @@ class AdminController extends Controller
             $contact->last_name . ' ' . $contact->first_name,
             $gender,
             $contact->email,
-            $contact->tel,
+            '="' . $contact->tel . '"',
             $contact->address,
             $contact->building,
             $contact->category ? $contact->category->content : '',
