@@ -1,23 +1,19 @@
-<!DOCTYPE html>
-<html lang="ja">
+    @extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <title>管理画面</title>
-    <link rel="stylesheet" href="{{ asset('css/common.css') }}">
-</head>
+    @section('title', '管理画面')
 
-<body>
-    <header class="header">
-        <a class="header__logo" href="/">FashionablyLate</a>
+    @section('css')
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    @endsection
 
-        <form class="header__form" action="/logout" method="POST">
-            @csrf
-            <button class="header__button" type="submit">logout</button>
-        </form>
-    </header>
+    @section('header-nav')
+    <form class="header__form" action="/logout" method="POST">
+        @csrf
+        <button class="header__button" type="submit">logout</button>
+    </form>
+@endsection
 
-    <main>
+@section('content')
         <div class="admin">
             <div class="admin__heading">
                 <h2>Admin</h2>
@@ -185,6 +181,22 @@
                             </div>
                         </div>
 
+                        <div class="modal-detail__row">
+                        <div class="modal-detail__label">どこで知りましたか？</div>
+                        <div class="modal-detail__value">
+                            {{ $contact->how_found }}
+                        </div>
+                    </div>
+
+            @if (!empty($contact->image_path))
+                        <div class="modal-detail__row">
+                        <div class="modal-detail__label">画像アップロード</div>
+                        <div class="modal-detail__value">
+                        <img class="modal-detail__image" src="{{ asset('storage/' . $contact->image_path) }}" alt="アップロード画像">
+                    </div>
+                </div>
+            @endif
+
                         <form class="modal__delete-form" action="/delete/{{ $contact->id }}" method="POST">
                             @csrf
                             @method('DELETE')
@@ -194,7 +206,4 @@
                 </div>
             @endforeach
         </div>
-    </main>
-</body>
-
-</html>
+@endsection

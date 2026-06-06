@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-<html lang="ja">
+    @extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <title>確認画面</title>
-    <link rel="stylesheet" href="{{ asset('css/common.css') }}">
-</head>
+    @section('title', '確認画面')
 
-<body>
-    <header class="header">
-        <a class="header__logo" href="/">FashionablyLate</a>
-    </header>
+    @section('css')
+    <link rel="stylesheet" href="{{ asset('css/confirm.css') }}">
+    @endsection
 
-    <main>
+    @section('content')
         <div class="confirm">
             <div class="confirm__heading">
                 <h2>Confirm</h2>
@@ -78,11 +72,29 @@
                     </tr>
 
                     <tr>
+                        <th class="confirm-table__header">どこで知りましたか？</th>
+                        <td class="confirm-table__text">
+                            <input type="text" value="{{ $contact['how_found'] }}" readonly>
+                        </td>
+                    </tr>
+
+                    @if (!empty($contact['image_path']))
+                    <tr>
+                        <th class="confirm-table__header">画像アップロード</th>
+                        <td class="confirm-table__text">
+                        <img class="confirm__image" src="{{ asset('storage/' . $contact['image_path']) }}" alt="アップロード画像">
+                        </td>
+                    </tr>
+                    @endif
+
+                    <tr>
                         <th class="confirm-table__header">お問い合わせ内容</th>
                         <td class="confirm-table__text">
                             <input type="text" value="{{ $contact['detail'] }}" readonly>
                         </td>
                     </tr>
+
+
                 </table>
 
                 <input type="hidden" name="category_id" value="{{ $contact['category_id'] }}">
@@ -96,6 +108,11 @@
                 <input type="hidden" name="address" value="{{ $contact['address'] }}">
                 <input type="hidden" name="building" value="{{ $contact['building'] }}">
                 <input type="hidden" name="detail" value="{{ $contact['detail'] }}">
+                <input type="hidden" name="how_found" value="{{ $contact['how_found'] }}">
+
+                @if (!empty($contact['image_path']))
+                    <input type="hidden" name="image_path" value="{{ $contact['image_path'] }}">
+                @endif 
 
                 <div class="confirm__button">
                     <button class="confirm__button-submit" type="submit" name="send" value="send">送信</button>
@@ -103,7 +120,4 @@
                 </div>
             </form>
         </div>
-    </main>
-</body>
-
-</html>
+    @endsection

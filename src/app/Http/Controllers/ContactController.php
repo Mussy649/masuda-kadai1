@@ -17,21 +17,7 @@ class ContactController extends Controller
 
     public function confirm(ContactRequest $request)
     {
-        $contact = $request->only([
-            'category_id',
-            'first_name',
-            'last_name',
-            'gender',
-            'email',
-            'tel1',
-            'tel2',
-            'tel3',
-            'address',
-            'building',
-            'detail',
-        ]);
-
-        $contact['tel'] = $request->tel1 . $request->tel2 . $request->tel3;
+        $contact = $this->getContactData($request, true);
 
         $category = Category::find($request->category_id);
 
@@ -44,6 +30,14 @@ class ContactController extends Controller
             return redirect('/')->withInput();
         }
 
+        $contact = $this->getContactData($request);
+
+        Contact::create($contact);
+
+            return view('thanks');
+    }
+    private function getContactData($request, $forConfirm = false)
+    {
         $contact = $request->only([
             'category_id',
             'first_name',
@@ -55,15 +49,20 @@ class ContactController extends Controller
             'detail',
         ]);
 
+        if ($forConfirm) {
+            $contact['tel1'] = $request->tel1;
+            $contact['tel2'] = $request->tel2;
+            $contact['tel3'] = $request->tel3;
+        }
+
         $contact['tel'] = $request->tel1 . $request->tel2 . $request->tel3;
 
-        Contact::create($contact);
+        $contact['how_found'] = is_array($request->how_found)
+            ? implode('　', $request->how_found)
+            : $request->how_found;
 
-        return redirect('/thanks');
-    }
+        $contact['image_path'] = $request->image_path;
 
-    public function thanks()
-    {
-        return view('thanks');
+        return $contact;
     }
 }

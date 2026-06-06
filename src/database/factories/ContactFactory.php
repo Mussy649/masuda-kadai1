@@ -12,43 +12,51 @@ class ContactFactory extends Factory
 
     public function definition()
     {
-        $lastNames = ['山田', '佐藤', '鈴木', '田中', '高橋', '伊藤', '渡辺', '中村'];
-        $firstNames = ['太郎', '花子', '一郎', '明', '美咲', '健太', '彩', '直樹'];
-
-        $addresses = [
-            '東京都渋谷区千駄ヶ谷1-2-3',
-            '東京都港区南青山2-3-4',
-            '東京都新宿区西新宿3-4-5',
-            '東京都世田谷区三軒茶屋1-5-6',
-            '東京都目黒区自由が丘2-6-7',
-        ];
-
-        $buildings = [
-            '千駄ヶ谷マンション101',
-            '青山レジデンス202',
-            '西新宿ビル301',
-            '三軒茶屋ハイツ403',
-            '',
-        ];
+        $category = Category::inRandomOrder()->first();
 
         $details = [
-            '商品の到着予定日を教えてください。',
-            '交換方法について確認したいです。',
-            '商品に不具合がありました。',
-            'ショップへの問い合わせです。',
-            'その他、確認したいことがあります。',
+            '商品のお届けについて' => [
+                '商品の到着予定日を教えてください。',
+                '配送状況を確認したいです。',
+                '指定した日時に商品を受け取ることはできますか。',
+                '配送先住所を変更したいです。',
+            ],
+            '商品の交換について' => [
+                '商品のサイズ交換をお願いしたいです。',
+                'カラーを変更して交換することはできますか。',
+                '交換手続きの流れを教えてください。',
+                '交換時の送料について確認したいです。',
+            ],
+            '商品トラブル' => [
+                '届いた商品に不具合がありました。',
+                '注文した商品と違うものが届きました。',
+                '商品の一部が破損していました。',
+                '商品に汚れがあったため確認をお願いします。',
+            ],
+            'ショップへのお問い合わせ' => [
+                '店舗の営業時間について確認したいです。',
+                '在庫状況を確認したい商品があります。',
+                'ショップへの問い合わせをお願いします。',
+                '店舗での受け取りが可能か確認したいです。',
+            ],
+            'その他' => [
+                'その他、確認したいことがあります。',
+                '会員情報について確認したいです。',
+                '注文内容について相談したいです。',
+                'キャンペーンについて詳しく知りたいです。',
+            ],
         ];
 
         return [
-            'category_id' => Category::inRandomOrder()->value('id'),
-            'first_name' => $this->faker->randomElement($firstNames),
-            'last_name' => $this->faker->randomElement($lastNames),
+            'category_id' => $category->id,
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(),
             'gender' => $this->faker->numberBetween(1, 3),
             'email' => $this->faker->unique()->safeEmail(),
-            'tel' => $this->faker->numerify('080########'),
-            'address' => $this->faker->randomElement($addresses),
-            'building' => $this->faker->randomElement($buildings),
-            'detail' => $this->faker->randomElement($details),
+            'tel' => $this->faker->numerify('0##########'),
+            'address' => $this->faker->address(),
+            'building' => $this->faker->optional()->secondaryAddress(),
+            'detail' => $this->faker->randomElement($details[$category->content]),
         ];
     }
 }

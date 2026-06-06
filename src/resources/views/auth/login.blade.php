@@ -1,17 +1,16 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>ログイン</title>
-    <link rel="stylesheet" href="{{ asset('css/common.css') }}">
-</head>
-<body>
-    <header class="header">
-        <a class="header__logo" href="/">FashionablyLate</a>
-        <a class="header__link" href="/register">register</a>
-    </header>
+    @extends('layouts.app')
 
-    <main>
+    @section('title', 'ログイン')
+
+    @section('css')
+    <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
+    @endsection
+
+    @section('header-nav')
+    <a class="header__link" href="/register">register</a>
+    @endsection
+
+    @section('content')
         <div class="auth">
             <div class="auth__heading">
                 <h2>Login</h2>
@@ -56,6 +55,6 @@
 
             </div>
         </div>
-    </main>
-</body>
-</html>
+    
+    @endsection
+    

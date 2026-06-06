@@ -1,22 +1,18 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>お問い合わせフォーム</title>
-    <link rel="stylesheet" href="{{ asset('css/common.css') }}">
-</head>
-<body>
-    <header class="header">
-        <a class="header__logo" href="/">FashionablyLate</a>
-    </header>
+    @extends('layouts.app')
 
-    <main>
+    @section('title', 'お問い合わせフォーム')
+
+    @section('css')
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+    @endsection
+
+    @section('content')
         <div class="contact">
             <div class="contact__heading">
                 <h2>Contact</h2>
             </div>
 
-            <form class="form" action="/confirm" method="POST">
+            <form class="form" action="/confirm" method="POST" enctype="multipart/form-data" novalidate>
                 @csrf
 
                 <div class="form__group">
@@ -162,11 +158,80 @@
                     </div>
                 </div>
 
+                <div class="form__group">
+                    <div class="form__label">
+                        <label>どこで知りましたか？<span class="form__label--note">（複数選択可）</span><span class="form__label--required">※</span></label>
+                    </div>
+
+                <div class="form__input">
+                    <div class="form__checkbox">
+                        <label>
+                            <input type="checkbox" name="how_found[]" value="自社サイト" {{ is_array(old('how_found')) && in_array('自社サイト', old('how_found')) ? 'checked' : '' }}>
+                            自社サイト
+                        </label>
+
+                        <label>
+                            <input type="checkbox" name="how_found[]" value="検索エンジン" {{ is_array(old('how_found')) && in_array('検索エンジン', old('how_found')) ? 'checked' : '' }}>
+                            検索エンジン
+                        </label>
+
+                        <label>
+                            <input type="checkbox" name="how_found[]" value="SNS" {{ is_array(old('how_found')) && in_array('SNS', old('how_found')) ? 'checked' : '' }}>
+                            SNS
+                        </label>
+
+                        <label>
+                            <input type="checkbox" name="how_found[]" value="テレビ・新聞" {{ is_array(old('how_found')) && in_array('テレビ・新聞', old('how_found')) ? 'checked' : '' }}>
+                            テレビ・新聞
+                        </label>
+
+                        <label>
+                            <input type="checkbox" name="how_found[]" value="友人・知人" {{ is_array(old('how_found')) && in_array('友人・知人', old('how_found')) ? 'checked' : '' }}>
+                            友人・知人
+                        </label>
+                    </div>
+
+                        @error('how_found')
+                            <p class="form__error">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form__group">
+                    <div class="form__label">
+                        <label>画像アップロード</label>
+                    </div>
+
+                        <div class="form__input">
+                            <p class="form__note">
+                                お問い合わせ内容に画像添付が必要な場合は、下記よりアップロードしてください。
+                            </p>
+
+                <div class="form__file-area">
+                        <label class="form__file-label" for="image_path">
+                            ファイルをアップロード
+                        </label>
+
+                        <select id="image_path" class="form__file-select" name="image_path">
+                            <option value=""></option>
+                            <option value="contact_images/card.jpg" {{ old('image_path') == 'contact_images/card.jpg' ? 'selected' : '' }}>card.jpg</option>
+                            <option value="contact_images/card1.jpg" {{ old('image_path') == 'contact_images/card1.jpg' ? 'selected' : '' }}>card1.jpg</option>
+                            <option value="contact_images/card2.jpg" {{ old('image_path') == 'contact_images/card2.jpg' ? 'selected' : '' }}>card2.jpg</option>
+                            <option value="contact_images/card3.jpg" {{ old('image_path') == 'contact_images/card3.jpg' ? 'selected' : '' }}>card3.jpg</option>
+                            <option value="contact_images/card4.jpg" {{ old('image_path') == 'contact_images/card4.jpg' ? 'selected' : '' }}>card4.jpg</option>
+                            <option value="contact_images/card5.jpg" {{ old('image_path') == 'contact_images/card5.jpg' ? 'selected' : '' }}>card5.jpg</option>
+                            <option value="contact_images/card6.jpg" {{ old('image_path') == 'contact_images/card6.jpg' ? 'selected' : '' }}>card6.jpg</option>
+                            <option value="contact_images/card7.jpg" {{ old('image_path') == 'contact_images/card7.jpg' ? 'selected' : '' }}>card7.jpg</option>
+                            <option value="contact_images/card8.jpg" {{ old('image_path') == 'contact_images/card8.jpg' ? 'selected' : '' }}>card8.jpg</option>
+                            <option value="contact_images/card9.jpg" {{ old('image_path') == 'contact_images/card9.jpg' ? 'selected' : '' }}>card9.jpg</option>
+                        </select>
+                </div>
+            </div>
+        </div>
+
                 <div class="form__button">
                     <button class="form__button-submit" type="submit">確認画面</button>
                 </div>
             </form>
         </div>
-    </main>
-</body>
-</html>
+    @endsection      

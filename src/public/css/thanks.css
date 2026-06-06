@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    font-family: "Times New Roman", "Yu Mincho", "YuMincho", serif;
+    color: #8b7969;
+    background-color: #ffffff;
+}
+
+a {
+    color: #8b7969;
+}
+
+.thanks {
+    position: relative;
+    height: 100vh;
+    text-align: center;
+}
+
+.thanks__background {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    z-index: 0;
+    transform: translate(-50%, -50%);
+    color: rgba(139, 121, 105, 0.08);
+    font-size: 180px;
+}
+
+.thanks__content {
+    position: relative;
+    z-index: 1;
+    padding-top: 280px;
+}
+
+.thanks__message {
+    margin-bottom: 30px;
+    color: #8b7969;
+    font-size: 24px;
+}
+
+.thanks__button a {
+    padding: 10px 35px;
+    background-color: #82756a;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+}

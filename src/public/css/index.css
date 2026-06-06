@@ -1,0 +1,163 @@
+.contact {
+    width: 70%;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+.contact__heading {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.contact__heading h2 {
+    font-size: 32px;
+    font-weight: normal;
+}
+
+.form {
+    width: 100%;
+}
+
+.form__group {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+
+.form__label {
+    width: 30%;
+    font-size: 18px;
+}
+
+.form__label--required {
+    margin-left: 5px;
+    color: #ff0000;
+}
+
+.form__input {
+    width: 70%;
+}
+
+.form__input input,
+.form__input select,
+.form__input textarea {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background-color: #f4f4f4;
+    color: #8b7969;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.form__input textarea {
+    height: 120px;
+    resize: none;
+}
+
+.form__input--name {
+    display: flex;
+    gap: 20px;
+}
+
+.form__input--name input {
+    width: 50%;
+}
+
+.form__input--tel {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.form__input--tel input {
+    width: 30%;
+}
+
+.form__radio label {
+    margin-right: 30px;
+    font-size: 18px;
+}
+
+.form__radio input {
+    width: auto;
+    margin-right: 8px;
+}
+
+.form__error {
+    margin-top: 8px;
+    color: #ff0000;
+    font-size: 14px;
+}
+
+.form__button {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.form__button-submit {
+    padding: 10px 40px;
+    border: none;
+    background-color: #82756a;
+    color: #ffffff;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.form__label--note {
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+.form__checkbox {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form__checkbox label {
+    font-size: 16px;
+}
+
+.form__checkbox input {
+    width: auto;
+    margin-right: 8px;
+}
+
+.form__note {
+    margin: 0 0 10px;
+    font-size: 14px;
+}
+
+
+.form__file-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form__file-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 170px;
+    height: 42px;
+    padding: 0 20px;
+    background-color: #82756a;
+    color: #ffffff;
+    font-size: 16px;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+.form__input .form__file-select {
+    width: 45px;
+    height: 42px;
+    padding: 10px;
+    border: none;
+    background-color: #f4f4f4;
+    color: #8b7969;
+    font-size: 16px;
+    box-sizing: border-box;
+    cursor: pointer;
+}

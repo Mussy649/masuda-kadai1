@@ -12,20 +12,27 @@ class ContactRequest extends FormRequest
     }
 
     public function rules()
-    {
-        return [
-            'last_name' => ['required', 'string', 'max:8'],
-            'first_name' => ['required', 'string', 'max:8'],
-            'gender' => ['required'],
-            'email' => ['required', 'email'],
-            'tel1' => ['required', 'regex:/^[0-9]+$/', 'max:5'],
-            'tel2' => ['required', 'regex:/^[0-9]+$/', 'max:5'],
-            'tel3' => ['required', 'regex:/^[0-9]+$/', 'max:5'],
-            'address' => ['required'],
-            'category_id' => ['required'],
-            'detail' => ['required', 'max:120'],
-        ];
+{
+    $rules = [
+        'last_name' => ['required', 'string', 'max:8'],
+        'first_name' => ['required', 'string', 'max:8'],
+        'gender' => ['required'],
+        'email' => ['required', 'email'],
+        'tel1' => ['required', 'regex:/^[0-9]+$/', 'max:5'],
+        'tel2' => ['required', 'regex:/^[0-9]+$/', 'max:5'],
+        'tel3' => ['required', 'regex:/^[0-9]+$/', 'max:5'],
+        'address' => ['required'],
+        'category_id' => ['required'],
+        'detail' => ['required', 'max:120'],
+        'how_found' => ['required'],
+    ];
+
+    if ($this->is('confirm')) {
+        $rules['how_found'] = ['required', 'array'];
     }
+
+    return $rules;
+}
 
     public function messages()
     {
@@ -43,9 +50,9 @@ class ContactRequest extends FormRequest
             'tel1.required' => '電話番号を入力してください',
             'tel2.required' => '電話番号を入力してください',
             'tel3.required' => '電話番号を入力してください',
-            'tel1.regex' => '電話番号は 半角英数字で入力してください',
-            'tel2.regex' => '電話番号は 半角英数字で入力してください',
-            'tel3.regex' => '電話番号は 半角英数字で入力してください',
+            'tel1.regex' => '電話番号は 半角数字で入力してください',
+            'tel2.regex' => '電話番号は 半角数字で入力してください',
+            'tel3.regex' => '電話番号は 半角数字で入力してください',
             'tel1.max' => '電話番号は 5桁まで数字で入力してください',
             'tel2.max' => '電話番号は 5桁まで数字で入力してください',
             'tel3.max' => '電話番号は 5桁まで数字で入力してください',
@@ -56,6 +63,9 @@ class ContactRequest extends FormRequest
 
             'detail.required' => 'お問い合わせ内容を入力してください',
             'detail.max' => 'お問い合わせ内容は120文字以内で入力してください',
-        ];
+
+            'how_found.required' => 'どこで知ったか教えてください', 
+            'how_found.array' => 'どこで知ったか教えてください',
+        ];   
     }
 }
